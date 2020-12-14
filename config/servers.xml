@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<servers>
+    <server>
+        <db_alias>aaa</db_alias>
+        <db_ip>x.x.x.x</db_ip>
+        <db_port>xxxx</db_port>
+        <db_vendor>Sybase</db_vendor>
+        <auth_interface>db-user-auth</auth_interface>
+    </server>
+    <server>
+        <db_alias>bbb</db_alias>
+        <db_ip>x.x.x.x</db_ip>
+        <db_port>xxxx</db_port>
+        <db_vendor>Sybase</db_vendor>
+        <auth_interface>db-user-auth</auth_interface>
+    </server>
+</servers>

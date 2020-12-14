@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<authorizations>
+    <authorization>
+        <auth_interface>db-user-auth</auth_interface>
+        <user>616161</user>
+        <password>616161</password>
+    </authorization>
+</authorizations>
