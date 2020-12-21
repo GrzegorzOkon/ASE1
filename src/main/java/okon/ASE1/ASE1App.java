@@ -2,17 +2,22 @@ package okon.ASE1;
 
 import okon.ASE1.config.AuthorizationConfigReader;
 import okon.ASE1.config.ServerConfigReader;
+import okon.ASE1.exception.AppException;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class ASE1App {
     static final Queue<Job> jobs = new LinkedList<>();
+    static final List<Extraction> extractions = new ArrayList();
 
     public static void main(String[] args) {
         initializeQueue();
+        startThreadPool(jobs.size());
+
     }
 
     static void initializeQueue() {
@@ -44,5 +49,22 @@ public class ASE1App {
             return true;
         }
         return false;
+    }
+
+    static void startThreadPool(int threadSum) {
+        Thread[] threads = new Thread[threadSum];
+        for (int i = 0; i < threadSum; i++) {
+            threads[i] = new JobConsumentThread();
+        }
+        for (int i = 0; i < threadSum; i++) {
+            threads[i].start();
+        }
+        for (int i = 0; i < threadSum; i++) {
+            try {
+                threads[i].join();
+            } catch (Exception e) {
+                throw new AppException(e);
+            }
+        }
     }
 }
