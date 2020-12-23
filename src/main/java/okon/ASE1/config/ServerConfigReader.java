@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.okon.ASE1.exception.ConfigurationException;
+import okon.ASE1.exception.ConfigurationException;
 import java.util.ArrayList;
 
 public class ServerConfigReader {

@@ -17,12 +17,11 @@ public class ASE1App {
     public static void main(String[] args) {
         initializeQueue();
         startThreadPool(jobs.size());
-
     }
 
     static void initializeQueue() {
         List<Server> servers = ServerConfigReader.readParams((new File("./config/servers.xml")));
-        List<Authorization> authorizations = AuthorizationConfigReader.readParams((new File("./config/server-auth.xml")));
+        List<Authorization> authorizations = AuthorizationConfigReader.readParams((new File("./config/authorizations.xml")));
         createJobs(servers, authorizations);
     }
 
@@ -66,5 +65,12 @@ public class ASE1App {
                 throw new AppException(e);
             }
         }
+    }
+
+    public static String getJarFileName() {
+        String path = ASE1App.class.getResource(ASE1App.class.getSimpleName() + ".class").getFile();
+        path = path.substring(0, path.lastIndexOf('!'));
+        path = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf('.'));
+        return path;
     }
 }

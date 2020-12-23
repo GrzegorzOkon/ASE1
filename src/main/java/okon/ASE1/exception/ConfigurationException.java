@@ -1,4 +1,4 @@
-package java.okon.ASE1.exception;
+package okon.ASE1.exception;
 
 public class ConfigurationException extends RuntimeException {
     public ConfigurationException(Throwable cause) {
