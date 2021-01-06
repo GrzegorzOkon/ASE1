@@ -16,11 +16,11 @@ public class JobConsumentThread extends Thread {
                 }
             }
             if (job != null) {
-                List<Extraction> extractedData = JobExecutor.execute(job);
-                synchronized (extractions) {
-                    for (Extraction extraction : extractedData)
+                List<Space> extractedData = JobExecutor.execute(job);
+                /*synchronized (extractions) {
+                    for (Space extraction : extractedData)
                         extractions.add(extraction);
-                }
+                }*/
             }
         }
     }

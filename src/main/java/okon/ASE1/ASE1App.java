@@ -12,7 +12,7 @@ import java.util.Queue;
 
 public class ASE1App {
     static final Queue<Job> jobs = new LinkedList<>();
-    static final List<Extraction> extractions = new ArrayList();
+    static final List<Space> extractions = new ArrayList();
 
     public static void main(String[] args) {
         initializeQueue();
