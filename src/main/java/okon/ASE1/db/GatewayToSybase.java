@@ -81,8 +81,6 @@ public class GatewayToSybase implements Closeable, Gateway {
                 result.add(rs.getString(1));
                 result.add(rs.getString(2));
                 result.add(rs.getString(3));
-                result.add(rs.getString(4));
-                result.add(rs.getString(5));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
