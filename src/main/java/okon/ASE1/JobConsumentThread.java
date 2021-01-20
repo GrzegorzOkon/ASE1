@@ -17,10 +17,10 @@ public class JobConsumentThread extends Thread {
             }
             if (job != null) {
                 List<Space> extractedData = JobExecutor.execute(job);
-                /*synchronized (extractions) {
+                synchronized (extractions) {
                     for (Space extraction : extractedData)
                         extractions.add(extraction);
-                }*/
+                }
             }
         }
     }

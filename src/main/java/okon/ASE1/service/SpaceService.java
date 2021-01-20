@@ -24,8 +24,11 @@ public class SpaceService {
         List<Space> result = new ArrayList<>();
         for (String database : databases) {
             List<String> dataSpace = db.getDataSpace(database);
+            List<String> logSpace = db.getLogSpace(database);
             List<Float> calculatedDataSpace = calculateFreeSpace(dataSpace);
-            result.add(new Space(database, calculatedDataSpace.get(0), calculatedDataSpace.get(1)));
+            List<Float> calculatedLogSpace = calculateFreeSpace(logSpace);
+            result.add(new Space(database, calculatedDataSpace.get(0), calculatedDataSpace.get(1),
+                    calculatedLogSpace.get(0), calculatedLogSpace.get(1)));
         }
         return result;
     }

@@ -14,9 +14,13 @@ public class ASE1App {
     static final Queue<Job> jobs = new LinkedList<>();
     static final List<Space> extractions = new ArrayList();
 
-    public static void main(String[] args) {
+    static {
         initializeQueue();
-        startThreadPool(jobs.size());
+    }
+
+    public static void main(String[] args) {
+        new ASE1App().startThreadPool(jobs.size());
+        new ReportPrinter().print(extractions);
     }
 
     static void initializeQueue() {
@@ -50,7 +54,7 @@ public class ASE1App {
         return false;
     }
 
-    static void startThreadPool(int threadSum) {
+    private void startThreadPool(int threadSum) {
         Thread[] threads = new Thread[threadSum];
         for (int i = 0; i < threadSum; i++) {
             threads[i] = new JobConsumentThread();

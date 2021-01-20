@@ -71,7 +71,23 @@ public class GatewayToSybase implements Closeable, Gateway {
 
     @Override
     public List<String> getLogSpace(String database) {
-        return null;
+        List<String> result = new ArrayList<>();
+        try (CallableStatement cstmt = db.prepareCall("{call sp_helpsegment('logsegment')}");) {
+            db.setCatalog(database);
+            db.setTransactionIsolation(1);
+            cstmt.setQueryTimeout(60);
+            boolean res = cstmt.execute();
+            for (int i = 1; res && i <= ASE_XX_RS_COUNT; i++) {
+                if (isLastResultSet(i)) {
+                    ResultSet rs = cstmt.getResultSet();
+                    result = getSpace(rs);
+                }
+                res = cstmt.getMoreResults();
+            }
+        } catch (SQLException throwables) {
+            throw new ConnectionException(throwables);
+        }
+        return result;
     }
 
     private List<String> getSpace(ResultSet rs) {
