@@ -18,8 +18,7 @@ public class JobConsumentThread extends Thread {
             if (job != null) {
                 List<Space> extractedData = JobExecutor.execute(job);
                 synchronized (extractions) {
-                    for (Space extraction : extractedData)
-                        extractions.add(extraction);
+                    extractions.add(new Result(job.getServer(), extractedData));
                 }
             }
         }

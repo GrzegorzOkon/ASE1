@@ -75,8 +75,8 @@ public class GatewayToSybase implements Closeable, Gateway {
             db.setTransactionIsolation(1);
             cstmt.setQueryTimeout(60);
             boolean res = cstmt.execute();
-            for (int i = 1; res && i <= version.getProcedureLastRSIndex()[0]; i++) {
-                if (isLastResultSet(i, version.getProcedureLastRSIndex()[0])) {
+            for (int i = 1; res && i <= version.getProcedureLastRSIndexes()[0]; i++) {
+                if (isLastResultSet(i, version.getProcedureLastRSIndexes()[0])) {
                     ResultSet rs = cstmt.getResultSet();
                     result = getSpace(rs);
                 }
@@ -96,8 +96,8 @@ public class GatewayToSybase implements Closeable, Gateway {
             db.setTransactionIsolation(1);
             cstmt.setQueryTimeout(60);
             boolean res = cstmt.execute();
-            for (int i = 1; res && i <= version.getProcedureLastRSIndex()[1]; i++) {
-                if (isLastResultSet(i, version.getProcedureLastRSIndex()[1])) {
+            for (int i = 1; res && i <= version.getProcedureLastRSIndexes()[1]; i++) {
+                if (isLastResultSet(i, version.getProcedureLastRSIndexes()[1])) {
                     ResultSet rs = cstmt.getResultSet();
                     result = getSpace(rs);
                 }
