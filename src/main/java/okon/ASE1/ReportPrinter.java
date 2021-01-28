@@ -18,13 +18,24 @@ public class ReportPrinter {
                 ReportFormatter formatter = new ReportFormatter();
                 System.out.println(formatter.format(new String[]{
                         space.getDatabase(),
-                        String.format("%.02f", space.getFreeData()) + " MB",
+                        convertToConvenientUnit(space.getFreeData()),
                         String.format("%.02f", space.getFreePercentData()) + " %",
-                        String.format("%.02f", space.getFreeLog()) + " MB",
+                        convertToConvenientUnit(space.getFreeLog()),
                         String.format("%.02f", space.getFreePercentLog()) + " %"}));
             }
             System.out.println();
             System.out.println();
         }
+    }
+
+    private String convertToConvenientUnit(Integer freeSpace) {
+        String[] units = new String[]{"bites", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
+        Float convertedSize = freeSpace.floatValue();
+        int flag = 0;
+        while (convertedSize >= 1024) {
+            convertedSize /= 1024;
+            flag += 1;
+        }
+        return String.format("%.02f", convertedSize) + " " + units[flag];
     }
 }

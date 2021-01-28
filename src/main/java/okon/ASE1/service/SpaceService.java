@@ -5,7 +5,6 @@ import okon.ASE1.Job;
 import okon.ASE1.db.Gateway;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SpaceService {
@@ -23,22 +22,15 @@ public class SpaceService {
     private List<Space> getDatabaseSpace(List<String> databases) {
         List<Space> result = new ArrayList<>();
         for (String database : databases) {
-            List<String> dataSpace = db.getDataSpace(database);
-            List<String> logSpace = db.getLogSpace(database);
-            List<Float> calculatedDataSpace = calculateFreeSpace(dataSpace);
-            List<Float> calculatedLogSpace = calculateFreeSpace(logSpace);
-            result.add(new Space(database, calculatedDataSpace.get(0), calculatedDataSpace.get(1),
-                    calculatedLogSpace.get(0), calculatedLogSpace.get(1)));
+            List<Integer> dataSpace = db.getDataSpace(database);
+            List<Integer> logSpace = db.getLogSpace(database);
+            result.add(new Space(database, dataSpace.get(0), calculateFreePercentSpace(dataSpace),
+                    logSpace.get(0), calculateFreePercentSpace(logSpace)));
         }
         return result;
     }
 
-    private List<Float> calculateFreeSpace(List<String> data) {
-        Float totalSize = Float.valueOf(data.get(0).trim().replace("MB", "0"));
-        Integer totalPages = Integer.valueOf(data.get(1).trim());
-        Integer freePages = Integer.valueOf(data.get(2).trim());
-        Float freeSpace = freePages.floatValue() / totalPages.floatValue() * totalSize.floatValue();
-        Float freePercentSpace = freePages.floatValue() / totalPages.floatValue() * 100.0f;
-        return Arrays.asList(freeSpace, freePercentSpace);
+    private Float calculateFreePercentSpace(List<Integer> space) {
+        return space.get(1).floatValue() / space.get(0).floatValue() * 100.0f;
     }
 }

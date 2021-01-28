@@ -2,12 +2,12 @@ package okon.ASE1;
 
 public class Space {
     private final String database;
-    private final Float freeData;
+    private final Integer freeData;
     private final Float freePercentData;
-    private final Float freeLog;
+    private final Integer freeLog;
     private final Float freePercentLog;
 
-    public Space(String database, Float freeData, Float freePercentData, Float freeLog, Float freePercentLog) {
+    public Space(String database, Integer freeData, Float freePercentData, Integer freeLog, Float freePercentLog) {
         this.database = database;
         this.freeData = freeData;
         this.freePercentData = freePercentData;
@@ -19,7 +19,7 @@ public class Space {
         return database;
     }
 
-    public Float getFreeData() {
+    public Integer getFreeData() {
         return freeData;
     }
 
@@ -27,7 +27,7 @@ public class Space {
         return freePercentData;
     }
 
-    public Float getFreeLog() {
+    public Integer getFreeLog() {
         return freeLog;
     }
 
